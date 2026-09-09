@@ -1,0 +1,494 @@
+[
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110554.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle12.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\food_waste15.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can75.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle2.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\food_waste8.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101608.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle213.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can11.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can65.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\tupperware1.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can31.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_103338.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\payaya.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_102840.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle107.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\box7.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle277.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_102323.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110703.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\31.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101400.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_112843.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle182.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle219.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\leaves2 (2).jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101056.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\coffeeplastic.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can45.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can5.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\tissue3.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle233.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\garlic.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_103237.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can119.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110534.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_102439.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle206.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110520.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\squash1.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle14.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can48.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\food_waste9.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can17.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\cup2.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101709.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle221.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110258.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle103.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101004.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can9.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle178.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle130.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle71.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle93.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle95.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110923.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle32.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle274.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110006.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can59.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can110.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can60.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\potato.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle37.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_111150.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\leaves4.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle147.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can56.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle163.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_111309.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\taro.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101336.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\tupperware18.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle15.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle101.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\ciggarate_box1.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle184.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle110.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can111.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle192.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle267.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110347.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle205.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\leaves1.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101552.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can63.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110115.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_084140.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle202.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_105351.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\orange.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle62.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\ripe_mangoes.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle194.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle153.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101741.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110934.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle150.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle48.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle262.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle276.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101156.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\newspaper.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_100948.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\jackfruit.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\tupperware7.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle91.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_102644.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_112302_986.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle249.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle241.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\biodegradable\\food_waste6.jpg",
+    "label": "biodegradable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260502_101933.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle285.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle228.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\bottle234.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can95.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can40.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can101.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_111939.jpg",
+    "label": "residual"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\recyclable\\can50.jpg",
+    "label": "recyclable"
+  },
+  {
+    "path": "C:\\Users\\Mona\\Desktop\\codes and program\\ecobin_2\\dataset\\residual\\IMG_20260429_110740.jpg",
+    "label": "residual"
+  }
+]

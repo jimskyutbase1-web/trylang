@@ -1,0 +1,22 @@
+# Python virtual environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Test, coverage, and editor files
+.pytest_cache/
+.coverage
+htmlcov/
+.vscode/
+.idea/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+secrets.h
+secrets.ini
+
+# Training data can be large and should not be committed accidentally.
+dataset/

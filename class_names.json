@@ -1,0 +1,16 @@
+{
+  "class_names": [
+    "biodegradable",
+    "recyclable",
+    "residual"
+  ],
+  "image_size": 224,
+  "input_contract": "RGB float32 pixels in 0..255; preprocessing is inside the model",
+  "test_accuracy": 0.8373983502388,
+  "macro_f1": 0.8512274943647493,
+  "per_class_recall": {
+    "biodegradable": 0.8888888888888888,
+    "recyclable": 0.8405797101449275,
+    "residual": 0.8055555555555556
+  }
+}
