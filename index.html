@@ -3,125 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESP32 Status Monitor</title>
-  <meta name="description" content="Real-time ESP32 IoT Microcontroller Active/Offline Status Monitor">
-
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <title>ESP32 Status</title>
   <link rel="stylesheet" href="style.css">
-
+  
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
-  <div class="container">
-    
-    <!-- TOP BAR -->
-    <header class="top-bar">
-      <div class="brand">
-        <div class="brand-icon">
-          <i class="fa-solid fa-microchip"></i>
-        </div>
-        <div>
-          <h1>ESP32 <span>Monitor</span></h1>
-          <p>Real-time Hardware Status</p>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <h1>ESP32 Status</h1>
+      <button id="toggle-settings-btn" class="text-btn">Settings</button>
+    </div>
+
+    <!-- Status Box -->
+    <div id="status-box" class="status-box offline">
+      <span class="status-label">Status</span>
+      <span id="status-text" class="status-value">OFFLINE</span>
+    </div>
+
+    <!-- Details -->
+    <div class="info-list">
+      <div class="info-row">
+        <span>IP Address:</span>
+        <strong id="ip-display">192.168.8.112</strong>
       </div>
-
-      <div class="top-actions">
-        <div class="cloud-badge" id="cloud-badge" title="Firebase Connection">
-          <span class="cloud-dot" id="cloud-dot"></span>
-          <span id="cloud-text">Connecting...</span>
-        </div>
-        <button class="settings-btn" id="open-settings-btn" title="Settings">
-          <i class="fa-solid fa-gear"></i>
-        </button>
+      <div class="info-row">
+        <span>Last Ping:</span>
+        <strong id="last-ping-display">Never</strong>
       </div>
-    </header>
-
-    <!-- MAIN STATUS HERO CARD -->
-    <main class="status-wrapper">
-      <div class="status-card status-checking" id="status-card">
-        
-        <!-- GLOWING ORB / ICON -->
-        <div class="status-orb" id="status-orb">
-          <i class="fa-solid fa-spinner fa-spin" id="status-icon"></i>
-        </div>
-
-        <!-- MAIN STATE TEXT -->
-        <h2 class="status-title" id="status-title">Checking ESP32...</h2>
-        <p class="status-sub" id="status-sub">Target IP: <strong id="ip-display">192.168.8.112</strong></p>
-
-        <!-- TELEMETRY STATS PILLS -->
-        <div class="telemetry-grid">
-          <div class="stat-pill">
-            <span class="stat-label"><i class="fa-regular fa-clock"></i> Last Ping</span>
-            <strong class="stat-val" id="last-ping-val">Waiting...</strong>
-          </div>
-          <div class="stat-pill">
-            <span class="stat-label"><i class="fa-solid fa-tower-broadcast"></i> Signal / Details</span>
-            <strong class="stat-val" id="details-val">Connecting to bridge...</strong>
-          </div>
-        </div>
-
-        <!-- ACTION BUTTON -->
-        <button class="btn-refresh" id="refresh-btn">
-          <i class="fa-solid fa-rotate"></i> Ping ESP32 Now
-        </button>
-
-      </div>
-    </main>
-
-    <!-- SETTINGS MODAL -->
-    <div class="modal-overlay" id="settings-modal">
-      <div class="modal-card">
-        <div class="modal-header">
-          <h3><i class="fa-solid fa-gear"></i> Monitor Settings</h3>
-          <button class="close-btn" id="close-settings-btn">&times;</button>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="input-firebase-url">
-              <i class="fa-solid fa-database"></i> Firebase Realtime Database URL
-            </label>
-            <input 
-              type="text" 
-              id="input-firebase-url" 
-              placeholder="https://your-project-default-rtdb.firebaseio.com"
-              autocomplete="off"
-            >
-            <small>Leave empty for direct local network polling.</small>
-          </div>
-
-          <div class="form-group">
-            <label for="input-esp32-ip">
-              <i class="fa-solid fa-network-wired"></i> ESP32 Target IP
-            </label>
-            <input 
-              type="text" 
-              id="input-esp32-ip" 
-              value="192.168.8.112"
-            >
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn-save" id="save-settings-btn">Save & Reconnect</button>
-        </div>
+      <div class="info-row">
+        <span>Message:</span>
+        <span id="details-display">Waiting for server heartbeat...</span>
       </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>ESP32 Telemetry &copy; 2026 • Live Hardware Monitor</p>
-    </footer>
+    <button id="ping-btn" class="primary-btn">Ping ESP32</button>
 
+    <!-- Settings Form (Hidden by default) -->
+    <div id="settings-panel" class="settings-panel hidden">
+      <hr>
+      <h3>Configuration</h3>
+      <label>Firebase Database URL</label>
+      <input type="text" id="firebase-url-input" placeholder="https://your-db.firebaseio.com">
+
+      <label>Target IP</label>
+      <input type="text" id="esp-ip-input" value="192.168.8.112">
+
+      <button id="save-btn" class="secondary-btn">Save</button>
+    </div>
   </div>
 
   <script src="app.js"></script>
