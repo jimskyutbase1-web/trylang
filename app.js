@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   startStalenessCheck();
 });
 
-function setStatus(isOnline, message = '', timestamp = null) {
-  lastPingTimestamp = timestamp || Math.floor(Date.now() / 1000);
-  const timeStr = new Date(lastPingTimestamp * 1000).toLocaleTimeString();
+function setStatus(isOnline, message = '', timeStr = null) {
+  lastPingTimestamp = Date.now();
+  const displayTime = timeStr || new Date().toLocaleTimeString();
 
   if (isOnline) {
     statusBox.className = 'status-box online';
@@ -43,19 +43,21 @@ function setStatus(isOnline, message = '', timestamp = null) {
     detailsDisplay.innerText = message || 'Device Unreachable';
   }
 
-  lastPingDisplay.innerText = timeStr;
+  lastPingDisplay.innerText = displayTime;
 }
 
 function startStalenessCheck() {
   if (stalenessInterval) clearInterval(stalenessInterval);
   stalenessInterval = setInterval(() => {
     if (lastPingTimestamp > 0) {
-      const now = Math.floor(Date.now() / 1000);
-      if (now - lastPingTimestamp > 12) {
-        setStatus(false, 'Heartbeat timed out');
+      const elapsed = Date.now() - lastPingTimestamp;
+      if (elapsed > 15000) {
+        statusBox.className = 'status-box offline';
+        statusText.innerText = 'OFFLINE';
+        detailsDisplay.innerText = 'Heartbeat timed out';
       }
     }
-  }, 4000);
+  }, 3000);
 }
 
 function initFirebase() {
@@ -72,6 +74,8 @@ function initFirebase() {
     }
 
     const db = firebase.database();
+    
+    // Listen for live ESP32 status updates
     db.ref('ecobin/esp32_status').on('value', (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -79,7 +83,7 @@ function initFirebase() {
           config.esp32Ip = data.ip;
           ipDisplay.innerText = data.ip;
         }
-        setStatus(data.online, data.details, data.last_seen);
+        setStatus(data.online, data.details, data.time);
       }
     });
   } catch (e) {
