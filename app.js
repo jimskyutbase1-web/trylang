@@ -74,8 +74,7 @@ function initFirebase() {
     }
 
     const db = firebase.database();
-    
-    // Listen for live ESP32 status updates
+
     db.ref('ecobin/esp32_status').on('value', (snapshot) => {
       const data = snapshot.val();
       if (data) {
