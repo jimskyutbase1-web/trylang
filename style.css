@@ -116,6 +116,7 @@ body {
   border-radius: 999px;
   font-size: 13px;
   color: var(--text-muted);
+  transition: var(--transition);
 }
 
 .status-badge strong {
@@ -127,18 +128,57 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  background: #6b7280;
+  transition: var(--transition);
+}
+
+/* Dynamic State Styles */
+.status-online .status-dot {
   background: var(--color-bio);
   box-shadow: 0 0 10px var(--color-bio);
+  animation: pulse-green 2s infinite;
+}
+.status-online {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+}
+.status-online span span {
+  color: var(--color-bio);
+  font-weight: 700;
 }
 
-.ping-dot {
-  animation: pulse-dot 2s infinite;
+.status-offline .status-dot {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+  animation: pulse-red 2s infinite;
+}
+.status-offline {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+}
+.status-offline span span {
+  color: #ef4444;
+  font-weight: 700;
 }
 
-@keyframes pulse-dot {
+.status-checking .status-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+}
+.status-checking {
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+@keyframes pulse-green {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
   70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 
 .settings-btn {
@@ -388,6 +428,112 @@ body {
 
 .footer-stat strong {
   color: var(--text-main);
+}
+
+/* HARDWARE TELEMETRY PANEL */
+.hardware-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+
+.hardware-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.hw-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hw-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bio);
+}
+
+.hw-title strong {
+  font-size: 14px;
+}
+
+.hw-title p {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hw-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.hw-online {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--color-bio);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.hw-offline {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.hw-checking {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.hw-detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.hw-detail-row strong {
+  color: var(--text-main);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.ping-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.ping-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* BIN TELEMETRY SIDE CARD */

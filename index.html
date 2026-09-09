@@ -34,14 +34,15 @@
       </div>
 
       <div class="header-status-bar">
-        <div class="status-badge" id="esp32-badge" title="ESP32 Microcontroller Status">
-          <span class="status-dot ping-dot"></span>
+        <!-- REALTIME ESP32 HARDWARE INDICATOR -->
+        <div class="status-badge status-checking" id="esp32-badge" title="Realtime ESP32 Microcontroller Status">
+          <span class="status-dot" id="esp32-dot"></span>
           <i class="fa-solid fa-microchip"></i>
-          <span>ESP32: <strong id="esp32-ip-display">192.168.8.112</strong></span>
+          <span>ESP32 (<strong id="esp32-ip-display">192.168.8.112</strong>): <span id="esp32-state-text">Checking...</span></span>
         </div>
 
         <div class="status-badge" id="firebase-badge" title="Firebase Realtime Sync">
-          <span class="status-dot"></span>
+          <span class="status-dot" id="firebase-dot"></span>
           <i class="fa-solid fa-bolt"></i>
           <span id="sync-status-text">Connecting...</span>
         </div>
@@ -71,15 +72,15 @@
               <i class="fa-solid fa-leaf" id="class-icon"></i>
             </div>
             <div class="class-label-wrap">
-              <span class="class-tag" id="last-class-tag">BIODEGRADABLE</span>
-              <p class="class-subtext" id="class-message">Servo command sent to ESP32</p>
+              <span class="class-tag" id="last-class-tag">STANDBY</span>
+              <p class="class-subtext" id="class-message">Waiting for camera inference...</p>
             </div>
           </div>
 
           <div class="gauge-container">
             <div class="circular-progress" id="confidence-gauge">
               <div class="gauge-inner">
-                <span class="gauge-value" id="confidence-text">98.4%</span>
+                <span class="gauge-value" id="confidence-text">--%</span>
                 <span class="gauge-label">Confidence</span>
               </div>
             </div>
@@ -92,30 +93,30 @@
             <div class="prob-row">
               <div class="prob-label">
                 <span><i class="fa-solid fa-leaf text-bio"></i> Biodegradable</span>
-                <strong id="prob-bio-val">98.4%</strong>
+                <strong id="prob-bio-val">0.0%</strong>
               </div>
               <div class="progress-track">
-                <div class="progress-fill fill-bio" id="prob-bio-bar" style="width: 98.4%"></div>
+                <div class="progress-fill fill-bio" id="prob-bio-bar" style="width: 0%"></div>
               </div>
             </div>
 
             <div class="prob-row">
               <div class="prob-label">
                 <span><i class="fa-solid fa-arrows-rotate text-recyc"></i> Recyclable</span>
-                <strong id="prob-recyc-val">1.2%</strong>
+                <strong id="prob-recyc-val">0.0%</strong>
               </div>
               <div class="progress-track">
-                <div class="progress-fill fill-recyc" id="prob-recyc-bar" style="width: 1.2%"></div>
+                <div class="progress-fill fill-recyc" id="prob-recyc-bar" style="width: 0%"></div>
               </div>
             </div>
 
             <div class="prob-row">
               <div class="prob-label">
                 <span><i class="fa-solid fa-trash text-resid"></i> Residual</span>
-                <strong id="prob-resid-val">0.4%</strong>
+                <strong id="prob-resid-val">0.0%</strong>
               </div>
               <div class="progress-track">
-                <div class="progress-fill fill-resid" id="prob-resid-bar" style="width: 0.4%"></div>
+                <div class="progress-fill fill-resid" id="prob-resid-bar" style="width: 0%"></div>
               </div>
             </div>
           </div>
@@ -124,7 +125,7 @@
         <div class="card-footer">
           <div class="footer-stat">
             <i class="fa-regular fa-clock"></i>
-            <span>Timestamp: <strong id="last-time-val">Just now</strong></span>
+            <span>Last Event: <strong id="last-time-val">None yet</strong></span>
           </div>
           <div class="footer-stat">
             <i class="fa-solid fa-robot"></i>
@@ -133,13 +134,38 @@
         </div>
       </section>
 
-      <!-- BIN STATUS & METRICS -->
+      <!-- BIN STATUS & ESP32 HARDWARE CARD -->
       <section class="card side-card">
         <div class="card-header">
           <div class="card-title">
-            <i class="fa-solid fa-chart-pie"></i>
-            <h2>Live Bin Telemetry</h2>
+            <i class="fa-solid fa-microchip"></i>
+            <h2>ESP32 Hardware Telemetry</h2>
           </div>
+        </div>
+
+        <!-- ESP32 HARDWARE TELEMETRY PANEL -->
+        <div class="hardware-box" id="hardware-panel">
+          <div class="hardware-header">
+            <div class="hw-title">
+              <span class="hw-icon"><i class="fa-solid fa-wifi"></i></span>
+              <div>
+                <strong>ESP32 Microcontroller</strong>
+                <p id="hw-ip-sub">IP: 192.168.8.112</p>
+              </div>
+            </div>
+            <div class="hw-badge hw-checking" id="hw-status-badge">Checking...</div>
+          </div>
+          <div class="hw-detail-row">
+            <span>Last Ping:</span>
+            <strong id="hw-last-ping">Never</strong>
+          </div>
+          <div class="hw-detail-row">
+            <span>Details:</span>
+            <span id="hw-details-text" class="text-dim">Waiting for Python server ping...</span>
+          </div>
+          <button class="ping-btn" id="hw-ping-btn">
+            <i class="fa-solid fa-rotate"></i> Ping ESP32 Now
+          </button>
         </div>
 
         <div class="bin-grid">
@@ -150,7 +176,7 @@
               <h4>Biodegradable</h4>
               <p class="bin-count" id="bio-count">0 items</p>
             </div>
-            <div class="bin-badge">Active</div>
+            <div class="bin-badge">Servo Ready</div>
           </div>
 
           <!-- Recyclable Bin -->
@@ -160,7 +186,7 @@
               <h4>Recyclable</h4>
               <p class="bin-count" id="recyc-count">0 items</p>
             </div>
-            <div class="bin-badge">Active</div>
+            <div class="bin-badge">Servo Ready</div>
           </div>
 
           <!-- Residual Bin -->
@@ -170,14 +196,14 @@
               <h4>Residual</h4>
               <p class="bin-count" id="resid-count">0 items</p>
             </div>
-            <div class="bin-badge">Active</div>
+            <div class="bin-badge">Servo Ready</div>
           </div>
         </div>
 
         <!-- QUICK TEST CONTROLS -->
         <div class="manual-controls">
           <h3>Simulation & Test Trigger</h3>
-          <p class="hint-text">Simulate classification events to preview telemetry and servo triggers:</p>
+          <p class="hint-text">Simulate AI & ESP32 sorting actions:</p>
           <div class="btn-group">
             <button class="btn btn-bio" id="test-bio-btn">
               <i class="fa-solid fa-leaf"></i> Bio

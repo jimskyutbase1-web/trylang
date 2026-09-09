@@ -10,9 +10,10 @@ import tensorflow as tf
 from env_loader import load_env_file
 
 try:
-    from firebase_sync import push_classification
+    from firebase_sync import push_classification, start_heartbeat_monitor
 except ImportError:
     push_classification = None
+    start_heartbeat_monitor = None
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -25,6 +26,10 @@ from flask_cors import CORS
 
 BASE_DIR = Path(__file__).resolve().parent
 load_env_file(BASE_DIR / ".env")
+
+# Start background heartbeat monitor to continuously report ESP32 online/offline status
+if start_heartbeat_monitor:
+    start_heartbeat_monitor()
 
 MODEL_PATH = BASE_DIR / "waste_classifier.keras"
 META_PATH = BASE_DIR / "class_names.json"

@@ -13,17 +13,25 @@ let stats = {
   recyclable: 0,
   residual: 0
 };
-let logs = [];
+let lastEspPingTimestamp = 0;
 let demoInterval = null;
+let stalenessCheckerInterval = null;
 
 // DOM Elements
+const esp32Badge = document.getElementById('esp32-badge');
+const esp32StateText = document.getElementById('esp32-state-text');
 const esp32IpDisplay = document.getElementById('esp32-ip-display');
 const footerEspIp = document.getElementById('footer-esp-ip');
 const syncStatusText = document.getElementById('sync-status-text');
 const firebaseBadge = document.getElementById('firebase-badge');
 
+const hwStatusBadge = document.getElementById('hw-status-badge');
+const hwIpSub = document.getElementById('hw-ip-sub');
+const hwLastPing = document.getElementById('hw-last-ping');
+const hwDetailsText = document.getElementById('hw-details-text');
+const hwPingBtn = document.getElementById('hw-ping-btn');
+
 const classOrb = document.getElementById('class-orb');
-const classIcon = document.getElementById('class-icon');
 const lastClassTag = document.getElementById('last-class-tag');
 const classMessage = document.getElementById('class-message');
 const confidenceGauge = document.getElementById('confidence-gauge');
@@ -56,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadSavedConfig();
   initFirebase();
   setupEventListeners();
+  startStalenessChecker();
 
   if (config.autoDemo) {
     startDemoMode();
@@ -68,7 +77,41 @@ function loadSavedConfig() {
   toggleDemo.checked = config.autoDemo;
 
   esp32IpDisplay.innerText = config.esp32Ip;
+  hwIpSub.innerText = `IP: ${config.esp32Ip}`;
   footerEspIp.innerText = config.esp32Ip;
+}
+
+// -------------------------------------------------------------
+// ESP32 REALTIME STATUS UPDATER
+// -------------------------------------------------------------
+function setEsp32Status(isOnline, details = '', timestamp = null) {
+  lastEspPingTimestamp = timestamp || Math.floor(Date.now() / 1000);
+  const timeStr = new Date(lastEspPingTimestamp * 1000).toLocaleTimeString();
+
+  esp32Badge.className = 'status-badge ' + (isOnline ? 'status-online' : 'status-offline');
+  esp32StateText.innerText = isOnline ? 'ACTIVE' : 'OFFLINE';
+
+  hwStatusBadge.className = 'hw-badge ' + (isOnline ? 'hw-online' : 'hw-offline');
+  hwStatusBadge.innerText = isOnline ? 'ONLINE' : 'OFFLINE';
+
+  hwLastPing.innerText = timeStr;
+  hwDetailsText.innerText = details || (isOnline ? 'Servo Ready & Microcontroller Responding' : 'No heartbeat received');
+  hwDetailsText.style.color = isOnline ? 'var(--color-bio)' : '#ef4444';
+}
+
+// Check every 4s if heartbeat is stale (>12s old)
+function startStalenessChecker() {
+  if (stalenessCheckerInterval) clearInterval(stalenessCheckerInterval);
+
+  stalenessCheckerInterval = setInterval(() => {
+    if (lastEspPingTimestamp > 0) {
+      const now = Math.floor(Date.now() / 1000);
+      const elapsed = now - lastEspPingTimestamp;
+      if (elapsed > 12) {
+        setEsp32Status(false, `Heartbeat lost (${elapsed}s ago)`);
+      }
+    }
+  }, 4000);
 }
 
 // -------------------------------------------------------------
@@ -78,6 +121,7 @@ function initFirebase() {
   if (!config.firebaseUrl) {
     syncStatusText.innerText = 'Demo / Standby';
     firebaseBadge.querySelector('.status-dot').style.background = '#f59e0b';
+    setEsp32Status(false, 'Connect Firebase in settings to see live hardware');
     return;
   }
 
@@ -94,7 +138,21 @@ function initFirebase() {
     syncStatusText.innerText = 'Connected to Cloud';
     firebaseBadge.querySelector('.status-dot').style.background = '#10b981';
 
-    // Listen for live classification events
+    // 1. Listen for live ESP32 status updates
+    db.ref('ecobin/esp32_status').on('value', (snapshot) => {
+      const statusData = snapshot.val();
+      if (statusData) {
+        if (statusData.ip) {
+          config.esp32Ip = statusData.ip;
+          esp32IpDisplay.innerText = statusData.ip;
+          hwIpSub.innerText = `IP: ${statusData.ip}`;
+          footerEspIp.innerText = statusData.ip;
+        }
+        setEsp32Status(statusData.online, statusData.details, statusData.last_seen);
+      }
+    });
+
+    // 2. Listen for live classification events
     db.ref('ecobin/latest').on('value', (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -102,20 +160,11 @@ function initFirebase() {
       }
     });
 
-    // Listen for ESP32 status updates
-    db.ref('ecobin/esp32_ip').on('value', (snapshot) => {
-      const ip = snapshot.val();
-      if (ip) {
-        config.esp32Ip = ip;
-        esp32IpDisplay.innerText = ip;
-        footerEspIp.innerText = ip;
-      }
-    });
-
   } catch (err) {
     console.warn('Firebase init error:', err);
     syncStatusText.innerText = 'Offline / Direct';
     firebaseBadge.querySelector('.status-dot').style.background = '#6b7280';
+    setEsp32Status(false, 'Firebase connection failed');
   }
 }
 
@@ -171,7 +220,6 @@ function handleIncomingData(data) {
   lastClassTag.style.color = `var(${colorVar})`;
 
   // Update Circular Gauge
-  const percent = Math.round(confidence * 100);
   confidenceText.innerText = `${(confidence * 100).toFixed(1)}%`;
   const degrees = Math.round((confidence * 360));
   confidenceGauge.style.background = `conic-gradient(var(${colorVar}) ${degrees}deg, rgba(255,255,255,0.08) 0deg)`;
@@ -222,6 +270,30 @@ function addLogRow(item) {
 // EVENT LISTENERS & TEST CONTROLS
 // -------------------------------------------------------------
 function setupEventListeners() {
+  // Direct ping button
+  hwPingBtn.addEventListener('click', async () => {
+    hwPingBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Pinging...';
+    hwStatusBadge.className = 'hw-badge hw-checking';
+    hwStatusBadge.innerText = 'Pinging...';
+
+    // If local network
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      const res = await fetch(`http://${config.esp32Ip}/`, { method: 'GET', signal: controller.signal, mode: 'no-cors' });
+      clearTimeout(timeoutId);
+      setEsp32Status(true, 'Local HTTP ping acknowledged');
+    } catch (e) {
+      if (config.autoDemo) {
+        setEsp32Status(true, 'Simulated Active: Servo Ready');
+      } else {
+        setEsp32Status(false, 'Local ping unreachable (check same Wi-Fi)');
+      }
+    } finally {
+      hwPingBtn.innerHTML = '<i class="fa-solid fa-rotate"></i> Ping ESP32 Now';
+    }
+  });
+
   // Manual test simulation buttons
   document.getElementById('test-bio-btn').addEventListener('click', () => {
     handleIncomingData({
@@ -281,6 +353,7 @@ function setupEventListeners() {
     localStorage.setItem('ecobin_auto_demo', config.autoDemo);
 
     esp32IpDisplay.innerText = config.esp32Ip;
+    hwIpSub.innerText = `IP: ${config.esp32Ip}`;
     footerEspIp.innerText = config.esp32Ip;
 
     settingsModal.classList.remove('active');
@@ -298,6 +371,8 @@ function setupEventListeners() {
 
 function startDemoMode() {
   if (demoInterval) clearInterval(demoInterval);
+  setEsp32Status(true, 'Demo Mode Active (Simulated ESP32 Online)');
+
   const classes = [
     { name: 'BIODEGRADABLE', conf: 0.97, bio: 0.97, rec: 0.02, res: 0.01 },
     { name: 'RECYCLABLE', conf: 0.93, bio: 0.04, rec: 0.93, res: 0.03 },
