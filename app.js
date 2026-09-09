@@ -1,5 +1,5 @@
 let config = {
-  firebaseUrl: localStorage.getItem('esp32_firebase_url') || '',
+  firebaseUrl: localStorage.getItem('esp32_firebase_url') || 'https://ecobin-c080b-default-rtdb.firebaseio.com',
   esp32Ip: localStorage.getItem('esp32_target_ip') || '192.168.8.112'
 };
 
