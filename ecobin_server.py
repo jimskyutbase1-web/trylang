@@ -9,6 +9,11 @@ import requests
 import tensorflow as tf
 from env_loader import load_env_file
 
+try:
+    from firebase_sync import push_classification
+except ImportError:
+    push_classification = None
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -676,8 +681,17 @@ def classify():
 
 
     # ========================================================
-    # RESPONSE TO CAMERA
+    # RESPONSE TO CAMERA & CLOUD SYNC
     # ========================================================
+
+    if push_classification:
+        push_classification(
+            label=label,
+            confidence=confidence,
+            probabilities=probabilities,
+            message=command_result["message"],
+            esp32_ip=ESP32_IP
+        )
 
     return jsonify({
 
