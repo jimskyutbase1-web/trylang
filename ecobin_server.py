@@ -89,16 +89,17 @@ print()
 print("Loading AI model...")
 
 try:
-    model = tf.keras.models.load_model(MODEL_PATH)
-
+    import keras
+    model = keras.models.load_model(MODEL_PATH)
     print("AI model loaded successfully!")
-
-except Exception as e:
-
-    print("ERROR: Could not load AI model.")
-    print(e)
-
-    raise
+except Exception as e1:
+    try:
+        model = tf.keras.models.load_model(MODEL_PATH)
+        print("AI model loaded successfully!")
+    except Exception as e2:
+        print("ERROR: Could not load AI model.")
+        print(e1)
+        raise e1
 
 
 # ============================================================
