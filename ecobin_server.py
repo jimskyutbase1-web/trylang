@@ -27,7 +27,6 @@ from flask_cors import CORS
 BASE_DIR = Path(__file__).resolve().parent
 load_env_file(BASE_DIR / ".env")
 
-# Start background heartbeat monitor to continuously report ESP32 online/offline status
 if start_heartbeat_monitor:
     start_heartbeat_monitor()
 

@@ -3,7 +3,6 @@ import time
 import threading
 import requests
 
-# Load Firebase URL from environment or .env
 FIREBASE_URL = os.getenv("FIREBASE_DB_URL", "").strip().rstrip("/")
 ESP32_IP = os.getenv("ESP32_IP", "192.168.8.112").strip()
 
@@ -17,14 +16,12 @@ def _push_worker(payload):
         return
 
     try:
-        # Update latest state
         requests.put(
             f"{FIREBASE_URL}/ecobin/latest.json",
             json=payload,
             timeout=2.0
         )
 
-        # Append to log history
         requests.post(
             f"{FIREBASE_URL}/ecobin/logs.json",
             json=payload,
