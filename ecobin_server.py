@@ -16,7 +16,12 @@ except ImportError:
     start_heartbeat_monitor = None
 
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+
+try:
+    from flask_cors import CORS
+    has_cors = True
+except ImportError:
+    has_cors = False
 
 
 # ============================================================
@@ -67,7 +72,8 @@ last_command_time = 0.0
 # ============================================================
 
 app = Flask(__name__)
-CORS(app)
+if has_cors:
+    CORS(app)
 
 
 # ============================================================
