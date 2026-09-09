@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoBin AI — Real-time IoT Waste Classifier Dashboard</title>
-  <meta name="description" content="Live IoT AI Waste Classifier Dashboard with real-time classification, ESP32 servo telemetry, and bin capacity monitoring.">
-  
+  <title>ESP32 Status Monitor</title>
+  <meta name="description" content="Real-time ESP32 IoT Microcontroller Active/Offline Status Monitor">
+
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,247 +13,75 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="style.css">
-  
+
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
-  <div class="app-container">
+  <div class="container">
     
-    <!-- HEADER -->
-    <header class="navbar">
+    <!-- TOP BAR -->
+    <header class="top-bar">
       <div class="brand">
-        <div class="logo-icon">
-          <i class="fa-solid fa-recycle"></i>
+        <div class="brand-icon">
+          <i class="fa-solid fa-microchip"></i>
         </div>
         <div>
-          <h1 class="brand-title">EcoBin <span>AI</span></h1>
-          <p class="brand-subtitle">Smart Waste Sorting Telemetry</p>
+          <h1>ESP32 <span>Monitor</span></h1>
+          <p>Real-time Hardware Status</p>
         </div>
       </div>
 
-      <div class="header-status-bar">
-        <!-- REALTIME ESP32 HARDWARE INDICATOR -->
-        <div class="status-badge status-checking" id="esp32-badge" title="Realtime ESP32 Microcontroller Status">
-          <span class="status-dot" id="esp32-dot"></span>
-          <i class="fa-solid fa-microchip"></i>
-          <span>ESP32 (<strong id="esp32-ip-display">192.168.8.112</strong>): <span id="esp32-state-text">Checking...</span></span>
+      <div class="top-actions">
+        <div class="cloud-badge" id="cloud-badge" title="Firebase Connection">
+          <span class="cloud-dot" id="cloud-dot"></span>
+          <span id="cloud-text">Connecting...</span>
         </div>
-
-        <div class="status-badge" id="firebase-badge" title="Firebase Realtime Sync">
-          <span class="status-dot" id="firebase-dot"></span>
-          <i class="fa-solid fa-bolt"></i>
-          <span id="sync-status-text">Connecting...</span>
-        </div>
-
-        <button class="settings-btn" id="open-settings-btn" title="Open Settings">
-          <i class="fa-solid fa-sliders"></i>
+        <button class="settings-btn" id="open-settings-btn" title="Settings">
+          <i class="fa-solid fa-gear"></i>
         </button>
       </div>
     </header>
 
-    <!-- MAIN DASHBOARD CONTENT -->
-    <main class="dashboard-grid">
-      
-      <!-- HERO CLASSIFICATION CARD -->
-      <section class="card hero-card" id="latest-card">
-        <div class="card-header">
-          <div class="card-title">
-            <i class="fa-solid fa-camera-viewfinder"></i>
-            <h2>Latest AI Classification</h2>
-          </div>
-          <span class="badge-live"><span class="pulse"></span> LIVE</span>
+    <!-- MAIN STATUS HERO CARD -->
+    <main class="status-wrapper">
+      <div class="status-card status-checking" id="status-card">
+        
+        <!-- GLOWING ORB / ICON -->
+        <div class="status-orb" id="status-orb">
+          <i class="fa-solid fa-spinner fa-spin" id="status-icon"></i>
         </div>
 
-        <div class="hero-body">
-          <div class="classification-visual">
-            <div class="icon-orb" id="class-orb">
-              <i class="fa-solid fa-leaf" id="class-icon"></i>
-            </div>
-            <div class="class-label-wrap">
-              <span class="class-tag" id="last-class-tag">STANDBY</span>
-              <p class="class-subtext" id="class-message">Waiting for camera inference...</p>
-            </div>
-          </div>
+        <!-- MAIN STATE TEXT -->
+        <h2 class="status-title" id="status-title">Checking ESP32...</h2>
+        <p class="status-sub" id="status-sub">Target IP: <strong id="ip-display">192.168.8.112</strong></p>
 
-          <div class="gauge-container">
-            <div class="circular-progress" id="confidence-gauge">
-              <div class="gauge-inner">
-                <span class="gauge-value" id="confidence-text">--%</span>
-                <span class="gauge-label">Confidence</span>
-              </div>
-            </div>
+        <!-- TELEMETRY STATS PILLS -->
+        <div class="telemetry-grid">
+          <div class="stat-pill">
+            <span class="stat-label"><i class="fa-regular fa-clock"></i> Last Ping</span>
+            <strong class="stat-val" id="last-ping-val">Waiting...</strong>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-label"><i class="fa-solid fa-tower-broadcast"></i> Signal / Details</span>
+            <strong class="stat-val" id="details-val">Connecting to bridge...</strong>
           </div>
         </div>
 
-        <div class="probabilities-section">
-          <h3>Class Probabilities Breakdown</h3>
-          <div class="prob-bars">
-            <div class="prob-row">
-              <div class="prob-label">
-                <span><i class="fa-solid fa-leaf text-bio"></i> Biodegradable</span>
-                <strong id="prob-bio-val">0.0%</strong>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill fill-bio" id="prob-bio-bar" style="width: 0%"></div>
-              </div>
-            </div>
+        <!-- ACTION BUTTON -->
+        <button class="btn-refresh" id="refresh-btn">
+          <i class="fa-solid fa-rotate"></i> Ping ESP32 Now
+        </button>
 
-            <div class="prob-row">
-              <div class="prob-label">
-                <span><i class="fa-solid fa-arrows-rotate text-recyc"></i> Recyclable</span>
-                <strong id="prob-recyc-val">0.0%</strong>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill fill-recyc" id="prob-recyc-bar" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <div class="prob-row">
-              <div class="prob-label">
-                <span><i class="fa-solid fa-trash text-resid"></i> Residual</span>
-                <strong id="prob-resid-val">0.0%</strong>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill fill-resid" id="prob-resid-bar" style="width: 0%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <div class="footer-stat">
-            <i class="fa-regular fa-clock"></i>
-            <span>Last Event: <strong id="last-time-val">None yet</strong></span>
-          </div>
-          <div class="footer-stat">
-            <i class="fa-solid fa-robot"></i>
-            <span>Threshold: <strong>80% Required</strong></span>
-          </div>
-        </div>
-      </section>
-
-      <!-- BIN STATUS & ESP32 HARDWARE CARD -->
-      <section class="card side-card">
-        <div class="card-header">
-          <div class="card-title">
-            <i class="fa-solid fa-microchip"></i>
-            <h2>ESP32 Hardware Telemetry</h2>
-          </div>
-        </div>
-
-        <!-- ESP32 HARDWARE TELEMETRY PANEL -->
-        <div class="hardware-box" id="hardware-panel">
-          <div class="hardware-header">
-            <div class="hw-title">
-              <span class="hw-icon"><i class="fa-solid fa-wifi"></i></span>
-              <div>
-                <strong>ESP32 Microcontroller</strong>
-                <p id="hw-ip-sub">IP: 192.168.8.112</p>
-              </div>
-            </div>
-            <div class="hw-badge hw-checking" id="hw-status-badge">Checking...</div>
-          </div>
-          <div class="hw-detail-row">
-            <span>Last Ping:</span>
-            <strong id="hw-last-ping">Never</strong>
-          </div>
-          <div class="hw-detail-row">
-            <span>Details:</span>
-            <span id="hw-details-text" class="text-dim">Waiting for Python server ping...</span>
-          </div>
-          <button class="ping-btn" id="hw-ping-btn">
-            <i class="fa-solid fa-rotate"></i> Ping ESP32 Now
-          </button>
-        </div>
-
-        <div class="bin-grid">
-          <!-- Bio Bin -->
-          <div class="bin-item bio-bin">
-            <div class="bin-icon"><i class="fa-solid fa-apple-whole"></i></div>
-            <div class="bin-info">
-              <h4>Biodegradable</h4>
-              <p class="bin-count" id="bio-count">0 items</p>
-            </div>
-            <div class="bin-badge">Servo Ready</div>
-          </div>
-
-          <!-- Recyclable Bin -->
-          <div class="bin-item recyc-bin">
-            <div class="bin-icon"><i class="fa-solid fa-bottle-water"></i></div>
-            <div class="bin-info">
-              <h4>Recyclable</h4>
-              <p class="bin-count" id="recyc-count">0 items</p>
-            </div>
-            <div class="bin-badge">Servo Ready</div>
-          </div>
-
-          <!-- Residual Bin -->
-          <div class="bin-item resid-bin">
-            <div class="bin-icon"><i class="fa-solid fa-dumpster"></i></div>
-            <div class="bin-info">
-              <h4>Residual</h4>
-              <p class="bin-count" id="resid-count">0 items</p>
-            </div>
-            <div class="bin-badge">Servo Ready</div>
-          </div>
-        </div>
-
-        <!-- QUICK TEST CONTROLS -->
-        <div class="manual-controls">
-          <h3>Simulation & Test Trigger</h3>
-          <p class="hint-text">Simulate AI & ESP32 sorting actions:</p>
-          <div class="btn-group">
-            <button class="btn btn-bio" id="test-bio-btn">
-              <i class="fa-solid fa-leaf"></i> Bio
-            </button>
-            <button class="btn btn-recyc" id="test-recyc-btn">
-              <i class="fa-solid fa-recycle"></i> Recyclable
-            </button>
-            <button class="btn btn-resid" id="test-resid-btn">
-              <i class="fa-solid fa-trash"></i> Residual
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- LOGS & RECENT ACTIVITY TABLE -->
-      <section class="card full-width-card">
-        <div class="card-header">
-          <div class="card-title">
-            <i class="fa-solid fa-list-check"></i>
-            <h2>Sorting Activity History</h2>
-          </div>
-          <button class="clear-btn" id="clear-logs-btn">
-            <i class="fa-solid fa-trash-can"></i> Clear
-          </button>
-        </div>
-
-        <div class="table-responsive">
-          <table class="history-table">
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Classification</th>
-                <th>Confidence</th>
-                <th>ESP32 Action</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="logs-tbody">
-              <!-- Dynamically populated rows -->
-            </tbody>
-          </table>
-        </div>
-      </section>
+      </div>
     </main>
 
     <!-- SETTINGS MODAL -->
     <div class="modal-overlay" id="settings-modal">
       <div class="modal-card">
         <div class="modal-header">
-          <h3><i class="fa-solid fa-gear"></i> EcoBin Dashboard Settings</h3>
+          <h3><i class="fa-solid fa-gear"></i> Monitor Settings</h3>
           <button class="close-btn" id="close-settings-btn">&times;</button>
         </div>
 
@@ -268,38 +96,30 @@
               placeholder="https://your-project-default-rtdb.firebaseio.com"
               autocomplete="off"
             >
-            <small class="form-help">Enter your Firebase database URL to sync live telemetry from Python.</small>
+            <small>Leave empty for direct local network polling.</small>
           </div>
 
           <div class="form-group">
             <label for="input-esp32-ip">
-              <i class="fa-solid fa-network-wired"></i> ESP32 Local IP Address
+              <i class="fa-solid fa-network-wired"></i> ESP32 Target IP
             </label>
             <input 
               type="text" 
               id="input-esp32-ip" 
-              value="192.168.8.112" 
-              placeholder="192.168.8.112"
+              value="192.168.8.112"
             >
-          </div>
-
-          <div class="form-group toggle-group">
-            <label for="toggle-demo">
-              <i class="fa-solid fa-play"></i> Auto Demo Mode (Simulate live incoming items)
-            </label>
-            <input type="checkbox" id="toggle-demo">
           </div>
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-secondary" id="save-settings-btn">Save Configuration</button>
+          <button class="btn-save" id="save-settings-btn">Save & Reconnect</button>
         </div>
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="footer">
-      <p>EcoBin AI Telemetry &copy; 2026 • Connected to ESP32 Hardware (<span id="footer-esp-ip">192.168.8.112</span>)</p>
+      <p>ESP32 Telemetry &copy; 2026 • Live Hardware Monitor</p>
     </footer>
 
   </div>
